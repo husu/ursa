@@ -1,7 +1,14 @@
 {
-  "urls": {
-    "test": "http://localhost:3261",
-    "chengdu": "https://ubertools.avosapps.com"
+  "cities": {
+    "test": {
+      "url": "http://localhost:3261",
+      "name": "测试",
+      "test": true
+    },
+    "chengdu": {
+      "url": "https://ubertools.avosapps.com",
+      "name": "成都"
+    }
   },
   "statContext": "/stats"
 }

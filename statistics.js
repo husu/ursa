@@ -47,10 +47,15 @@ function Router(AV, express, options) {
             res.send(new Date().getTime() + '');
         });
 
+        router.get("/cities", checkLogin);
+        router.get("/cities", function (req, res) {
+            res.send(Config.cities);
+        });
+
         router.get("/:city", checkLogin);
         router.get("/:city", function (req, res) {
             var city = req.params.city;
-            var url = Config.urls[city];
+            var url = Config.cities[city].url;
 
             if (!url) {
                 return res.send(ErrorCode.CITY_NOT_FOUND)
