@@ -61,11 +61,18 @@ function Router(AV, express, options) {
                 return res.send(ErrorCode.CITY_NOT_FOUND)
             }
 
+            var metrics;
+            if (req.query.metrics instanceof Array) {
+                metrics = req.query.metrics.join(",");
+            } else {
+                metrics = req.query.metrics;
+            }
+
             var params = {
                 type: req.query.type,
                 query: {
                     platform: req.query.platform,
-                    metrics: req.query.metrics,
+                    metrics: metrics,
                     start: req.query.start,
                     end: req.query.end,
                     appversion: req.query.appversion,
