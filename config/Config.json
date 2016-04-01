@@ -8,6 +8,74 @@
     "chengdu": {
       "url": "https://ubertools.avosapps.com",
       "name": "成都"
+    },
+    "chongqing": {
+      "url": "https://ubercq.leanapp.cn",
+      "name": "重庆"
+    },
+    "beijing": {
+      "url": "https://uberbj.leanapp.cn",
+      "name": "北京"
+    },
+    "shanghai": {
+      "url": "https://ubersh.leanapp.cn",
+      "name": "上海"
+    },
+    "hangzhou": {
+      "url": "https://uberhz.leanapp.cn",
+      "name": "杭州"
+    },
+    "guangzhou": {
+      "url": "https://ubergz.leanapp.cn",
+      "name": "广州"
+    },
+    "shenzhen": {
+      "url": "https://ubersz.leanapp.cn",
+      "name": "深圳"
+    },
+    "changsha": {
+      "url": "https://ubercs.leanapp.cn",
+      "name": "长沙"
+    },
+    "nanjing": {
+      "url": "https://ubernj.leanapp.cn",
+      "name": "南京"
+    },
+    "xiamen": {
+      "url": "https://uberxm.leanapp.cn",
+      "name": "厦门"
+    },
+    "suzhou": {
+      "url": "https://ubersuzhou.leanapp.cn",
+      "name": "苏州"
+    },
+    "dalian": {
+      "url": "https://uberdl.leanapp.cn",
+      "name": "大连"
+    },
+    "guiyang": {
+      "url": "https://ubergy.leanapp.cn",
+      "name": "贵阳"
+    },
+    "xian": {
+      "url": "https://uberxian.leanapp.cn",
+      "name": "西安"
+    },
+    "wuhan": {
+      "url": "https://uberwh.leanapp.cn",
+      "name": "武汉"
+    },
+    "ningbo": {
+      "url": "https://ubernb.leanapp.cn",
+      "name": "宁波"
+    },
+    "hefei": {
+      "url": "https://uberhf.leanapp.cn",
+      "name": "合肥"
+    },
+    "jinan": {
+      "url": "https://uberjn.leanapp.cn",
+      "name": "济南"
     }
   },
   "statContext": "/stats"
