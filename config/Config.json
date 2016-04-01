@@ -1,0 +1,7 @@
+{
+  "urls": {
+    "test": "http://localhost:3261",
+    "chengdu": "https://ubertools.avosapps.com"
+  },
+  "statContext": "/stats"
+}

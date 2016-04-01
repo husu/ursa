@@ -1,0 +1,15 @@
+{
+  "name": "parsec-ursa",
+  "version": "0.0.1",
+  "description": "数据统计模块",
+  "license": "MIT",
+  "private": true,
+  "main": "index.js",
+  "author": "Parsec",
+  "dependencies": {
+    "object-assign": "^4.0.1"
+  },
+  "engines": {
+    "node": "4.x"
+  }
+}

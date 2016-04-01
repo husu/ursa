@@ -1,0 +1,30 @@
+{
+  "SUCCESS": {
+    "errorCode": 0,
+    "message": "成功"
+  },
+  "LOGIN_FAILED": {
+    "errorCode": 1,
+    "message": "登录失败"
+  },
+  "NOT_ADMIN": {
+    "errorCode": 2,
+    "message": "非管理员"
+  },
+  "NOT_LOGIN": {
+    "errorCode": 3,
+    "message": "未登录"
+  },
+  "CITY_NOT_FOUND": {
+    "errorCode": 4,
+    "message": "城市不存在"
+  },
+  "STATS_QUERY_FAILED": {
+    "errorCode": 5,
+    "message": "统计查询请求失败"
+  },
+  "QUERY_TYPE_NOT_SUPPORTED": {
+    "errorCode": 6,
+    "message": "不支持的统计查询类型"
+  }
+}
