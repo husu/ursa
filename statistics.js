@@ -70,7 +70,7 @@ function Router(AV, express, options) {
 
             AV.Cloud.httpRequest({
                 method: 'GET',
-                url: url + UberStat.statContext,
+                url: url + Config.statContext,
                 headers: {
                     'Content-Type': 'application/json'
                 }
