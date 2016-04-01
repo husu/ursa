@@ -37,7 +37,7 @@ function Router(AV, express, options) {
     var crypto = require('crypto');
     var objectAssign = require('object-assign');
 
-    var LeanCloudStatsAPI = "https://api.leancloud.cn/1.1/stats/appmetrics";
+    var LeanCloudStatsAPI = "https://api.leancloud.cn/1.1/stats/";
 
     this.create = function () {
 
@@ -125,10 +125,10 @@ function Router(AV, express, options) {
 
             var params = JSON.parse(data.data);
 
-            if (params.type === 'leancloud') {
+            if (params.type === 'appmetrics' || params.type === 'rtmetrics') {
                 AV.Cloud.httpRequest({
                     method: 'GET',
-                    url: LeanCloudStatsAPI,
+                    url: LeanCloudStatsAPI + params.type,
                     params: params.query,
                     headers: {
                         'Content-Type': 'application/json',
