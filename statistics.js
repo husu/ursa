@@ -99,7 +99,7 @@ function Router(AV, express, options) {
             }).then(function (response) {
                 res.type('json').send(response.text);
             }).fail(function (error) {
-                res.send(objectAssign(ErrorCode.STATS_QUERY_FAILED, {internalError: error.data}));
+                res.send(objectAssign(ErrorCode.STATS_QUERY_FAILED, {internalError: error.data.toString()}));
             });
 
         });
