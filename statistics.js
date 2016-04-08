@@ -177,29 +177,12 @@ function Router(AV, express, options) {
                         if (a instanceof Array) {
                             var d = {};
                             a.forEach(function (item) {
-                                if (d[item.metrics]) {
-                                    for (var p in d[item.metrics]) {
-                                        if (!d[item.metrics].hasOwnProperty(p)) {
-                                            continue;
-                                        }
-                                        d[item.metrics][p] = (d[item.metrics][p] || 0) + item.data[p];
-                                    }
-                                } else {
-                                    d[item.metrics] = item.data;
-                                }
+                                d[item.metrics] = sumAIntoB(item.data, d[item.metrics]);
                             });
                             b.forEach(function (item) {
-                                if (d[item.metrics]) {
-                                    for (var p in d[item.metrics]) {
-                                        if (!d[item.metrics].hasOwnProperty(p)) {
-                                            continue;
-                                        }
-                                        d[item.metrics][p] = (d[item.metrics][p] || 0) + item.data[p];
-                                    }
-                                } else {
-                                    d[item.metrics] = item.data;
-                                }
+                                d[item.metrics] = sumAIntoB(item.data, d[item.metrics]);
                             });
+                  
 
                             var da = [];
                             for (var p in d) {
@@ -229,6 +212,20 @@ function Router(AV, express, options) {
                 res.sendStatus(400).send(ErrorCode.QUERY_TYPE_NOT_SUPPORTED);
             }
         });
+
+        function sumAIntoB(a, b) {
+            if (b) {
+                for (var p in a) {
+                    if (!a.hasOwnProperty(p)) {
+                        continue;
+                    }
+                    b[p] = (b[p] || 0) + a[p];
+                }
+            } else {
+                b = a;
+            }
+            return b;
+        }
 
         function checkLogin(req, res, next) {
             if (req.session.user) {
