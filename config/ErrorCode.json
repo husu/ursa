@@ -26,5 +26,9 @@
   "QUERY_TYPE_NOT_SUPPORTED": {
     "errorCode": 6,
     "message": "不支持的统计查询类型"
+  },
+  "FEATURE_NOT_ACTIVE": {
+    "errorCode": 7,
+    "message": "功能未激活"
   }
 }
