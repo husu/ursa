@@ -182,7 +182,7 @@ function Router(AV, express, options) {
                             b.forEach(function (item) {
                                 d[item.metrics] = sumAIntoB(item.data, d[item.metrics]);
                             });
-                  
+
 
                             var da = [];
                             for (var p in d) {
@@ -194,14 +194,7 @@ function Router(AV, express, options) {
 
                             return da;
                         } else {
-                            for (var p in a.data) {
-                                if (!a.data.hasOwnProperty(p)) {
-                                    continue;
-                                }
-                                b.data[p] = (b.data[p] || 0) + a.data[p];
-                            }
-
-                            return b;
+                            return {data: sumAIntoB(a.data, b.data), metrics: a.metrics};
                         }
                     }).then(function (data) {
                         res.type('json').send(data);
@@ -214,16 +207,15 @@ function Router(AV, express, options) {
         });
 
         function sumAIntoB(a, b) {
-            if (b) {
-                for (var p in a) {
-                    if (!a.hasOwnProperty(p)) {
-                        continue;
-                    }
-                    b[p] = (b[p] || 0) + a[p];
+            b = objectAssign(b, {});
+       
+            for (var p in a) {
+                if (!a.hasOwnProperty(p)) {
+                    continue;
                 }
-            } else {
-                b = a;
+                b[p] = (b[p] || 0) + a[p];
             }
+
             return b;
         }
 
