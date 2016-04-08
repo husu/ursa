@@ -34,5 +34,9 @@
   "FEATURE_NOT_ACTIVE": {
     "errorCode": 7,
     "message": "功能未激活"
+  },
+  "FORM_DATA_INVALID": {
+    "errorCode": 8,
+    "message": "表单数据无效"
   }
 }

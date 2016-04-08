@@ -76,7 +76,8 @@ function Router(AV, express, options) {
                     start: req.query.start,
                     end: req.query.end,
                     appversion: req.query.appversion,
-                    channel: req.query.channel
+                    channel: req.query.channel,
+                    event: req.query.event
                 }
             };
 
@@ -126,20 +127,92 @@ function Router(AV, express, options) {
             var params = JSON.parse(data.data);
 
             if (params.type === 'appmetrics' || params.type === 'rtmetrics') {
-                AV.Cloud.httpRequest({
-                    method: 'GET',
-                    url: LeanCloudStatsAPI + params.type,
-                    params: params.query,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-LC-Id': process.env.LC_APP_ID,
-                        'X-LC-Key': process.env.LC_APP_MASTER_KEY + ",master"
-                    }
-                }).then(function (response) {
-                    res.type('json').send(response.text);
-                }).fail(function (error) {
-                    res.status(500).send(error.data);
-                });
+                if (params.query.platform) {
+                    AV.Cloud.httpRequest({
+                        method: 'GET',
+                        url: LeanCloudStatsAPI + params.type,
+                        params: params.query,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-LC-Id': process.env.LC_APP_ID,
+                            'X-LC-Key': process.env.LC_APP_MASTER_KEY + ",master"
+                        }
+                    }).then(function (response) {
+                        res.type('json').send(response.text);
+                    }).fail(function (error) {
+                        res.status(500).send(error.data);
+                    });
+                } else {
+                    var p1 = params.query;
+                    var p2 = params.query;
+
+                    p1.platform = "iOS";
+                    p2.platform = "android";
+
+                    AV.Promise.when(
+                        AV.Cloud.httpRequest({
+                            method: 'GET',
+                            url: LeanCloudStatsAPI + params.type,
+                            params: p1,
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-LC-Id': process.env.LC_APP_ID,
+                                'X-LC-Key': process.env.LC_APP_MASTER_KEY + ",master"
+                            }
+                        }),
+                        AV.Cloud.httpRequest({
+                            method: 'GET',
+                            url: LeanCloudStatsAPI + params.type,
+                            params: p2,
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-LC-Id': process.env.LC_APP_ID,
+                                'X-LC-Key': process.env.LC_APP_MASTER_KEY + ",master"
+                            }
+                        })
+                    ).then(function (a, b) {
+                        a = JSON.parse(a.text);
+                        b = JSON.parse(b.text);
+
+                        if (a instanceof Array) {
+                            var d = {};
+                            a.forEach(function (item_a) {
+                                if (d[item_a.metrics]) {
+                                    for (var p in d[item_a.metrics]) {
+                                        if (!d[item_a.metrics].hasOwnProperty(p)) {
+                                            continue;
+                                        }
+                                        d[item_a.metrics][p] = (d[item_a.metrics][p] || 0) + item_a.data[p];
+                                    }
+                                } else {
+                                    d[item_a.metrics] = item_a.data;
+                                }
+                            });
+
+                            var da = [];
+                            for (var p in d) {
+                                if (!d.hasOwnProperty(p)) {
+                                    continue;
+                                }
+                                da.push({data: d[p], metrics: p});
+                            }
+
+                            return da;
+                        } else {
+                            for (var p in a.data) {
+                                if (!a.data.hasOwnProperty(p)) {
+                                    continue;
+                                }
+                                b.data[p] = (b.data[p] || 0) + a.data[p];
+                            }
+
+                            return b;
+                        }
+                    }).then(function (data) {
+                        res.type('json').send(data);
+                    });
+                }
+
             } else {
                 res.sendStatus(400).send(ErrorCode.QUERY_TYPE_NOT_SUPPORTED);
             }
