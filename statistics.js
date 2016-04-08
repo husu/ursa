@@ -207,8 +207,8 @@ function Router(AV, express, options) {
         });
 
         function sumAIntoB(a, b) {
-            b = objectAssign(b, {});
-       
+            b = objectAssign(b || {}, {});
+
             for (var p in a) {
                 if (!a.hasOwnProperty(p)) {
                     continue;
