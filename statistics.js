@@ -77,7 +77,8 @@ function Router(AV, express, options) {
                     end: req.query.end,
                     appversion: req.query.appversion,
                     channel: req.query.channel,
-                    event: req.query.event
+                    event: req.query.event,
+                    event_label: req.query.event_label
                 }
             };
 
@@ -148,7 +149,7 @@ function Router(AV, express, options) {
                         AV.Cloud.httpRequest({
                             method: 'GET',
                             url: LeanCloudStatsAPI + params.type,
-                            params: objectAssign(params.query,{platform:"iOS"}),
+                            params: objectAssign(params.query,{platform:"ios"}),
                             headers: {
                                 'Content-Type': 'application/json',
                                 'X-LC-Id': process.env.LC_APP_ID,
