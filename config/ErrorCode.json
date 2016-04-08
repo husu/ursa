@@ -3,6 +3,10 @@
     "errorCode": 0,
     "message": "成功"
   },
+  "UNHANDLED_ERROR": {
+    "errorCode": -1,
+    "message": "未处理异常"
+  },
   "LOGIN_FAILED": {
     "errorCode": 1,
     "message": "登录失败"

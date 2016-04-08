@@ -1,6 +1,6 @@
 {
   "name": "parsec-ursa",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "数据统计模块",
   "license": "MIT",
   "private": true,
