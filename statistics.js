@@ -143,17 +143,12 @@ function Router(AV, express, options) {
                         res.status(500).send(error.data);
                     });
                 } else {
-                    var p1 = params.query;
-                    var p2 = params.query;
-
-                    p1.platform = "iOS";
-                    p2.platform = "android";
 
                     AV.Promise.when(
                         AV.Cloud.httpRequest({
                             method: 'GET',
                             url: LeanCloudStatsAPI + params.type,
-                            params: p1,
+                            params: objectAssign(params.query,{platform:"iOS"}),
                             headers: {
                                 'Content-Type': 'application/json',
                                 'X-LC-Id': process.env.LC_APP_ID,
@@ -163,7 +158,7 @@ function Router(AV, express, options) {
                         AV.Cloud.httpRequest({
                             method: 'GET',
                             url: LeanCloudStatsAPI + params.type,
-                            params: p2,
+                            params: objectAssign(params.query,{platform:"android"}),
                             headers: {
                                 'Content-Type': 'application/json',
                                 'X-LC-Id': process.env.LC_APP_ID,
