@@ -176,16 +176,28 @@ function Router(AV, express, options) {
 
                         if (a instanceof Array) {
                             var d = {};
-                            a.forEach(function (item_a) {
-                                if (d[item_a.metrics]) {
-                                    for (var p in d[item_a.metrics]) {
-                                        if (!d[item_a.metrics].hasOwnProperty(p)) {
+                            a.forEach(function (item) {
+                                if (d[item.metrics]) {
+                                    for (var p in d[item.metrics]) {
+                                        if (!d[item.metrics].hasOwnProperty(p)) {
                                             continue;
                                         }
-                                        d[item_a.metrics][p] = (d[item_a.metrics][p] || 0) + item_a.data[p];
+                                        d[item.metrics][p] = (d[item.metrics][p] || 0) + item.data[p];
                                     }
                                 } else {
-                                    d[item_a.metrics] = item_a.data;
+                                    d[item.metrics] = item.data;
+                                }
+                            });
+                            b.forEach(function (item) {
+                                if (d[item.metrics]) {
+                                    for (var p in d[item.metrics]) {
+                                        if (!d[item.metrics].hasOwnProperty(p)) {
+                                            continue;
+                                        }
+                                        d[item.metrics][p] = (d[item.metrics][p] || 0) + item.data[p];
+                                    }
+                                } else {
+                                    d[item.metrics] = item.data;
                                 }
                             });
 
