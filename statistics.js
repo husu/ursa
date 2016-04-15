@@ -67,8 +67,8 @@ function Router(AV, express, options) {
                 headers: {
                     'Content-Type': 'text/plain'
                 }
-            }).then(function (version) {
-                res.send(version);
+            }).then(function (response) {
+                res.send(response.text);
             }).fail(function (e) {
                 res.send("未知版本");
             });
