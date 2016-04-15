@@ -53,6 +53,27 @@ function Router(AV, express, options) {
             res.send(packageJson.version);
         });
 
+        router.get("/version/:city", function (req, res) {
+            var city = req.params.city;
+            var url = Config.cities[city].url;
+
+            if (!url) {
+                return res.send(ErrorCode.CITY_NOT_FOUND)
+            }
+
+            AV.Cloud.httpRequest({
+                method: 'GET',
+                url: url + Config.statContext + "/version",
+                headers: {
+                    'Content-Type': 'text/plain'
+                }
+            }).then(function (version) {
+                res.send(version);
+            }).fail(function (e) {
+                res.send("未知版本");
+            });
+        });
+
         router.get("/cities", checkLogin);
         router.get("/cities", function (req, res) {
             res.send(Config.cities);
