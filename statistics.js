@@ -70,7 +70,7 @@ function Router(AV, express, options) {
             }).then(function (response) {
                 res.send(response.text);
             }).fail(function (e) {
-                res.send("未知版本");
+                res.error("未知版本");
             });
         });
 
