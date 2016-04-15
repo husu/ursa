@@ -37,6 +37,8 @@ function Router(AV, express, options) {
     var crypto = require('crypto');
     var objectAssign = require('object-assign');
 
+    var packageJson = require('./package.json');
+
     var LeanCloudStatsAPI = "https://api.leancloud.cn/1.1/stats/";
 
     this.create = function () {
@@ -45,6 +47,10 @@ function Router(AV, express, options) {
 
         router.get('/', function (req, res) {
             res.send(new Date().getTime() + '');
+        });
+
+        router.get("/version", function (req, res) {
+            res.send(packageJson.version);
         });
 
         router.get("/cities", checkLogin);
@@ -149,7 +155,7 @@ function Router(AV, express, options) {
                         AV.Cloud.httpRequest({
                             method: 'GET',
                             url: LeanCloudStatsAPI + params.type,
-                            params: objectAssign(params.query,{platform:"ios"}),
+                            params: objectAssign(params.query, {platform: "ios"}),
                             headers: {
                                 'Content-Type': 'application/json',
                                 'X-LC-Id': process.env.LC_APP_ID,
@@ -159,7 +165,7 @@ function Router(AV, express, options) {
                         AV.Cloud.httpRequest({
                             method: 'GET',
                             url: LeanCloudStatsAPI + params.type,
-                            params: objectAssign(params.query,{platform:"android"}),
+                            params: objectAssign(params.query, {platform: "android"}),
                             headers: {
                                 'Content-Type': 'application/json',
                                 'X-LC-Id': process.env.LC_APP_ID,
