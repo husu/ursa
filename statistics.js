@@ -35,7 +35,7 @@ function Router(AV, express, options) {
     var ErrorCode = require("./config/ErrorCode.json");
 
     var crypto = require('crypto');
-    var objectAssign = require('object-assign');
+    var _ = require('underscore');
 
     var packageJson = require('./package.json');
 
@@ -135,7 +135,7 @@ function Router(AV, express, options) {
             }).then(function (response) {
                 res.type('json').send(response.text);
             }).fail(function (error) {
-                res.send(objectAssign(ErrorCode.STATS_QUERY_FAILED, {internalError: error.data}));
+                res.send(_.extend({},ErrorCode.STATS_QUERY_FAILED, {internalError: error.data}));
             });
 
         });
@@ -176,7 +176,7 @@ function Router(AV, express, options) {
                         AV.Cloud.httpRequest({
                             method: 'GET',
                             url: LeanCloudStatsAPI + params.type,
-                            params: objectAssign(params.query, {platform: "ios"}),
+                            params: _.extend({},params.query, {platform: "ios"}),
                             headers: {
                                 'Content-Type': 'application/json',
                                 'X-LC-Id': process.env.LC_APP_ID,
@@ -186,7 +186,7 @@ function Router(AV, express, options) {
                         AV.Cloud.httpRequest({
                             method: 'GET',
                             url: LeanCloudStatsAPI + params.type,
-                            params: objectAssign(params.query, {platform: "android"}),
+                            params: _.extend({},params.query, {platform: "android"}),
                             headers: {
                                 'Content-Type': 'application/json',
                                 'X-LC-Id': process.env.LC_APP_ID,
@@ -230,7 +230,7 @@ function Router(AV, express, options) {
         });
 
         function sumAIntoB(a, b) {
-            b = objectAssign(b || {}, {});
+            b = _.extend({},b || {}, {});
 
             for (var p in a) {
                 if (!a.hasOwnProperty(p)) {
