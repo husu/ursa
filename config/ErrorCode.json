@@ -7,6 +7,10 @@
     "errorCode": -1,
     "message": "未处理异常"
   },
+  "FAILURE": {
+    "errorCode": -2,
+    "message": "失败"
+  },
   "LOGIN_FAILED": {
     "errorCode": 1,
     "message": "登录失败"
