@@ -76,6 +76,18 @@
     "jinan": {
       "url": "https://uberjn.leanapp.cn",
       "name": "济南"
+    },
+    "qingdao": {
+      "url": "https://uberqd.leanapp.cn/",
+      "name": "青岛"
+    },
+    "zhengzhou": {
+      "url": "https://uberzz.leanapp.cn",
+      "name": "郑州"
+    },
+    "shenyang": {
+      "url": "https://ubersy.leanapp.cn",
+      "name": "沈阳"
     }
   },
   "statContext": "/stats"
