@@ -118,7 +118,7 @@ router.get("/:city", (req, res) => {
     }).then(function (response) {
         res.type('json').send(response.text);
     }).fail(function (error) {
-        console.log("ursa", error.text);
+        // console.log("ursa", error.text);
         res.send(_.extend({}, ErrorCode.STATS_QUERY_FAILED, { internalError: error.text }));
     });
 
