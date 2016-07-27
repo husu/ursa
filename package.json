@@ -1,15 +1,24 @@
 {
   "name": "parsec-ursa",
-  "version": "1.2.4",
+  "version": "2.0.0",
   "description": "数据统计模块",
   "license": "MIT",
   "private": true,
   "main": "index.js",
   "author": "Parsec",
-  "dependencies": {
-    "underscore": "^1.8.3"
-  },
   "engines": {
     "node": "4.x"
+  },
+  "dependencies": {
+    "lodash": "^4.14.0",
+    "moment": "^2.14.1"
+  },
+  "peerDependencies": {
+    "express": "4.*",
+    "leanengine": "*"
+  },
+  "devDependencies": {
+    "express": "^4.14.0",
+    "leanengine": "^0.4.2"
   }
 }
